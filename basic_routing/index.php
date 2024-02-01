@@ -47,6 +47,9 @@ class Invoice {
     public function create(): string {
         return 'Create Invoice';
     }
+    public function store(): string {
+        return 'Store Invoice';
+    }
 }
 class Home {
     public function index(): string {
@@ -90,7 +93,7 @@ $router->register('get', '/home',[Home::class, 'index'])
     ->register('get', '/invoice',[Invoice::class, 'index'])
     ->register('post', '/invoice/create',[Invoice::class, 'create'])
     ->register('get', '/invoice/store',[Invoice::class, 'store']);
-echo $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));
+//echo $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));
 
 echo '<pre>';
 print_r($_SERVER);
