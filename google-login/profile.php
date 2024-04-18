@@ -15,10 +15,10 @@ $google_name = $_SESSION['google_name'];
 $google_picture = $_SESSION['google_picture'];*/
 
 // Database connection variables
-$db_host = 'localhost';
-$db_name = 'sociallogin';
-$db_user = 'root';
-$db_pass = '';
+$db_host = 'db';
+$db_name = 'default';
+$db_user = 'user';
+$db_pass = 'user';
 // Attempt to connect to database
 try {
     // Connect to the MySQL database using PDO...

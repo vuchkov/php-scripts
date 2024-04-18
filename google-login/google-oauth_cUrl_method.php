@@ -1,10 +1,7 @@
 <?php
 
-// Database connection variables
-$db_host = 'localhost';
-$db_name = 'sociallogin';
-$db_user = 'root';
-$db_pass = '';
+require_once 'config.php';
+
 // Attempt to connect to database
 try {
     // Connect to the MySQL database using PDO...
