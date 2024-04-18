@@ -3,7 +3,7 @@
 session_start();
 // You have to add library:
 // https://github.com/googleapis/google-api-php-client/
-require '../vendor/autoload.php';
+require 'vendor/autoload.php';
 // Update the following variables
 $google_oauth_client_id = 'YOUR_CLIENT_ID';
 $google_oauth_client_secret = 'YOUR_CLIENT_SECRET';
