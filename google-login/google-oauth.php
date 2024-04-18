@@ -2,6 +2,7 @@
 // Initialize the session
 session_start();
 // Include the Facebook SDK
+// You have to add https://github.com/googleapis/google-api-php-client/
 require 'google-api-client/vendor/autoload.php';
 // Update the following variables
 $google_oauth_client_id = 'YOUR_CLIENT_ID';
