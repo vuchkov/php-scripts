@@ -1,0 +1,28 @@
+/* style.css */
+body {
+    font-size: 11px;
+    font-family: verdana;
+    color: #000;
+}
+form { margin : 0; }
+#messages {
+    background: #eee;
+    padding: 5px;
+    margin : 5px;
+}
+#main {
+    width: 758px;
+    border : 1px solid #000;
+    float : left;
+    padding-right : 5px;
+}
+#map {
+    width: 400px;
+    height: 400px;
+    float: left;
+}
+#formwrapper {
+    width : 350px;
+    float: right;
+}
+.location { width : 250px; font-size : 10px }

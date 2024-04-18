@@ -1,0 +1,29 @@
+<markers>
+    <marker latitude="50.9859" longitude="-114.058"
+            locname="Deerfoot Meadows" address="100-33 Heritage Meadows Way SE"
+            city="Calgary" province="Alberta" postal="T2H 3B8" />
+    <marker latitude="51.0563" longitude="-114.095"
+            locname="North Hill S/C" address="1632-14th Ave"
+            city="Calgary" province="Alberta" postal="T2N 1M7" />
+    <marker latitude="51.0947" longitude="-114.142"
+            locname="Market Mall" address="RO47-3625 Shaganappi Trail NW"
+            city="Calgary" province="Alberta" postal="T3A 0E2" />
+    <marker latitude="51.0404" longitude="-114.131"
+            locname="Westbrook Mall" address="1200 37 St SW"
+            city="Calgary" province="Alberta" postal="T3C 1S2" />
+    <marker latitude="51.0921" longitude="-113.919"
+            locname="Sunridge Mall" address="2525-36TH St NE"
+            city="Calgary" province="Alberta" postal="T1Y 5T4" />
+    <marker latitude="51.0469" longitude="-113.918"
+            locname="Marlborough Mall" address="1240 - 3800 Memorial Dr NE"
+            city="Calgary" province="Alberta" postal="T2A 2K2" />
+    <marker latitude="51.1500" longitude="-114.062"
+            locname="Coventry Hills Centre" address="130 Country Village Rd NE"
+            city="Calgary" province="Alberta" postal="T3K 6B8" />
+    <marker latitude="50.9921" longitude="-114.040"
+            locname="Southcentre Mall" address="100 Anderson Rd NE"
+            city="Calgary" province="Alberta" postal="T2J 3V1" />
+    <marker latitude="50.9296" longitude="-113.962"
+            locname="South Trail" address="4777 130 Ave SE"
+            city="Calgary" province="Alberta" postal="T2Z 4J2" />
+</markers>
