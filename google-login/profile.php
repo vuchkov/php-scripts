@@ -6,14 +6,12 @@ if (!isset($_SESSION['google_loggedin'])) {
     header('Location: login.php');
     exit;
 }
-
 // Retrieve session variables
-
-/*$google_loggedin = $_SESSION['google_loggedin'];
+$google_loggedin = $_SESSION['google_loggedin'];
 $google_email = $_SESSION['google_email'];
 $google_name = $_SESSION['google_name'];
-$google_picture = $_SESSION['google_picture'];*/
-
+$google_picture = $_SESSION['google_picture'];
+/* REPLACE with this (for DB users support):
 // Database connection variables
 $db_host = 'db';
 $db_name = 'default';
@@ -36,8 +34,7 @@ $account = $stmt->fetch(PDO::FETCH_ASSOC);
 $google_loggedin = $_SESSION['google_loggedin'];
 $google_email = $account['email'];
 $google_name = $account['name'];
-$google_picture = $account['picture'];
-
+$google_picture = $account['picture'];*/
 ?>
 <!DOCTYPE html>
 <html>

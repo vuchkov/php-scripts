@@ -1,39 +1,65 @@
 <?php
 // Initialize the session
 session_start();
-// You have to add library:
-// https://github.com/googleapis/google-api-php-client/
-require 'vendor/autoload.php';
-// Update the following variables
-$google_oauth_client_id = 'YOUR_CLIENT_ID';
-$google_oauth_client_secret = 'YOUR_CLIENT_SECRET';
-$google_oauth_redirect_uri = 'http://localhost/google-login/google-oauth.php';
+
+// Source: https://codeshack.io/implement-google-login-php/
+// Replace with your data & google console credentials (below):
+define('YOUR_CLIENT_ID', '64384209813-sf300uack5df9vo42i5342c36j3g9pkd.apps.googleusercontent.com/@@@@');
+define('YOUR_CLIENT_SECRET', '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/@@@@');
+define('YOUR_REDIRECT_URI', 'http://google-login.docksal.site:8080/google-oauth.php/@@@@');
+$google_oauth_client_id = YOUR_CLIENT_ID;
+$google_oauth_client_secret = YOUR_CLIENT_SECRET;
+$google_oauth_redirect_uri = 'http://google-login.docksal.site:8080/google-oauth.php';
 $google_oauth_version = 'v3';
-// Create the Google Client object
-$client = new Google_Client();
-$client->setClientId($google_oauth_client_id);
-$client->setClientSecret($google_oauth_client_secret);
-$client->setRedirectUri($google_oauth_redirect_uri);
-$client->addScope("https://www.googleapis.com/auth/userinfo.email");
-$client->addScope("https://www.googleapis.com/auth/userinfo.profile");
-// If the captured code param exists and is valid
+
+$db_host = 'db';
+$db_name = 'default';
+$db_user = 'user';
+$db_pass = 'user';
+
+// If the captured code param exists and is valid.
 if (isset($_GET['code']) && !empty($_GET['code'])) {
-    // Exchange the one-time authorization code for an access token
-    $accessToken = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-    $client->setAccessToken($accessToken);
+    // Execute cURL request to retrieve the access token
+    $params = [
+        'code' => $_GET['code'],
+        'client_id' => $google_oauth_client_id,
+        'client_secret' => $google_oauth_client_secret,
+        'redirect_uri' => $google_oauth_redirect_uri,
+        'grant_type' => 'authorization_code'
+    ];
+    $post_params = http_build_query($params);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://accounts.google.com/o/oauth2/token');
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_params);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    $response = json_decode($response, true);
+
     // Make sure access token is valid
-    if (isset($accessToken['access_token']) && !empty($accessToken['access_token'])) {
-        // Now that we have an access token, we can fetch the user's profile data
-        $google_oauth = new Google_Service_Oauth2($client);
-        $google_account_info = $google_oauth->userinfo->get();
+    if (isset($response['access_token']) && !empty($response['access_token'])) {
+        // Execute cURL request to retrieve the user info associated with the Google account
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://www.googleapis.com/oauth2/' . $google_oauth_version . '/userinfo');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer ' . $response['access_token']]);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $profile = json_decode($response, true);
         // Make sure the profile data exists
-        if (isset($google_account_info->email)) {
+        if (isset($profile['email'])) {
+            $google_name_parts = [];
+            $google_name_parts[] = isset($profile['given_name']) ? preg_replace('/[^a-zA-Z0-9]/s', '', $profile['given_name']) : '';
+            $google_name_parts[] = isset($profile['family_name']) ? preg_replace('/[^a-zA-Z0-9]/s', '', $profile['family_name']) : '';
+
             // Authenticate the user
             session_regenerate_id();
             $_SESSION['google_loggedin'] = TRUE;
-            $_SESSION['google_email'] = $google_account_info->email;
-            $_SESSION['google_name'] = $google_account_info->name;
-            $_SESSION['google_picture'] = $google_account_info->picture;
+            $_SESSION['google_email'] = $profile['email'];
+            $_SESSION['google_name'] = implode(' ', $google_name_parts);
+            $_SESSION['google_picture'] = isset($profile['picture']) ? $profile['picture'] : '';
+
             // Redirect to profile page
             header('Location: profile.php');
             exit;
@@ -43,9 +69,21 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
     } else {
         exit('Invalid access token! Please try again later!');
     }
+
 } else {
-    // Redirect to Google Authentication page
-    $authUrl = $client->createAuthUrl();
-    header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
+    // Define params and redirect to Google Authentication page
+    $params = [
+        'response_type' => 'code',
+        'client_id' => $google_oauth_client_id,
+        'redirect_uri' => $google_oauth_redirect_uri,
+        'scope' => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
+        'access_type' => 'offline',
+        'prompt' => 'consent'
+    ];
+    $post_params = http_build_query($params);
+    header('Location: https://accounts.google.com/o/oauth2/auth?' . $post_params);
     exit;
 }
+
+
+
