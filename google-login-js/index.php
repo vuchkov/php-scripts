@@ -1,10 +1,5 @@
 <?php
-/*
-Client ID:
-64384209813-sf300uack5df9vo42i5342c36j3g9pkd.apps.googleusercontent.com
-Client secret:
-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
-*/
+// JS google login is deprecated!
 ?>
 <!DOCTYPE html>
 <html lang="en-GB">
