@@ -4,12 +4,12 @@ session_start();
 
 // Source: https://codeshack.io/implement-google-login-php/
 // Replace with your data & google console credentials (below):
-define('YOUR_CLIENT_ID', '64384209813-sf300uack5df9vo42i5342c36j3g9pkd.apps.googleusercontent.com/@@@@');
-define('YOUR_CLIENT_SECRET', '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/@@@@');
-define('YOUR_REDIRECT_URI', 'http://google-login.docksal.site:8080/google-oauth.php/@@@@');
+define('YOUR_CLIENT_ID', '<add_your_google_console_client_id>');
+define('YOUR_CLIENT_SECRET', '<add_your_google_console_client_secret>');
+define('YOUR_REDIRECT_URI', 'https://site.com/google-oauth.php<add_your_google_console_redirect_uri>');
 $google_oauth_client_id = YOUR_CLIENT_ID;
 $google_oauth_client_secret = YOUR_CLIENT_SECRET;
-$google_oauth_redirect_uri = 'http://google-login.docksal.site:8080/google-oauth.php';
+$google_oauth_redirect_uri = YOUR_REDIRECT_URI;
 $google_oauth_version = 'v3';
 
 $db_host = 'db';
