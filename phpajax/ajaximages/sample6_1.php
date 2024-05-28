@@ -1,7 +1,5 @@
-<!-- sample6_1.html -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"?
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Sample 6_1</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -11,13 +9,13 @@
 </head>
 <body>
 <div id="showimg"></div>
-<form id="uploadform" action="process_upload.php" method="post"?
-      enctype="multipart/form-data" target="uploadframe"?
+<form id="uploadform" action="process_upload.php" method="post"
+      enctype="multipart/form-data" target="uploadframe"
       onsubmit="uploadimg(this); return false">
     Upload a File:<br />
     <input type="file" id="myfile" name="myfile" />
     <input type="submit" value="Submit" />
-    <iframe id="uploadframe" name="uploadframe" src="process_upload.php"?
+    <iframe id="uploadframe" name="uploadframe" src="process_upload.php"
             class="noshow"></iframe>
 </form>
 </body>
